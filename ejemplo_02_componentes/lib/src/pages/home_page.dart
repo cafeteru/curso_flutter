@@ -19,12 +19,12 @@ class HomePage extends StatelessWidget {
         initialData: [],
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           return ListView(
-            children: _listItems(snapshot.data),
+            children: _listItems(snapshot.data, context),
           );
         });
   }
 
-  List<Widget> _listItems(List<dynamic> options) {
+  List<Widget> _listItems(List<dynamic> options, BuildContext context) {
     return options.map((option) {
       return Column(
         children: [
@@ -32,9 +32,7 @@ class HomePage extends StatelessWidget {
             title: Text(option['texto']),
             leading: getIcon(option['icon']),
             trailing: Icon(Icons.keyboard_arrow_right, color: Colors.blue),
-            onTap: () {
-              print(option);
-            },
+            onTap: () => Navigator.pushNamed(context, '/${option['ruta']}'),
           ),
           Divider(
             color: Colors.blue,
